@@ -30,3 +30,34 @@ $(document).ready(function () {
         e.preventDefault();
     });
 });
+
+
+    const carousel = document.querySelector('.carousel');
+    const prevButton = document.querySelector('.carousel-button.prev');
+    const nextButton = document.querySelector('.carousel-button.next');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        const totalItems = document.querySelectorAll('.carousel-item').length;
+        if (index >= totalItems) {
+            currentIndex = 0;
+        } else if (index < 0) {
+            currentIndex = totalItems - 1;
+        } else {
+            currentIndex = index;
+        }
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    nextButton.addEventListener('click', () => {
+        showSlide(currentIndex + 1);
+    });
+
+    prevButton.addEventListener('click', () => {
+        showSlide(currentIndex - 1);
+    });
+
+    // Optional: Auto slide
+    setInterval(() => {
+        showSlide(currentIndex + 1);
+    }, 5000);
